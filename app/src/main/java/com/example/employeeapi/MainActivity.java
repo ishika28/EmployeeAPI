@@ -42,19 +42,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Employee>> call, Response<List<Employee>> response) {
 
-                if (response.isSuccessful()){
+                if (!response.isSuccessful()){
                     Toast.makeText(MainActivity.this, "Error" + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 List<Employee> employeeList = response.body();
                 for (Employee employee : employeeList){
-                    String data ="";
-                    data +="Employee name :" + employee.getEmployee_name() + "/n";
-                    data +="Employee Age :" + employee.getEmployee_age() + "/n";
-                    data +="Employee Salary :" + employee.getEmployee_salary() + "/n";
-                    data +="-------------------" + "/n";
-
+                    String data = "";
+                    data += "Employee ID : " + employee.getId() + "\n";
+                    data += "Employee Name : " + employee.getEmployee_name() + "\n";
+                    data += "Employee Salary : " + employee.getEmployee_salary() + "\n";
+                    data += "Employee Age : " + employee.getEmployee_age() + "\n";
+                    data += "Employee profile : " + employee.getProfile_image() + "\n";
+                    data += "-----------------------------------------------------" + "\n";
                     tvOutput.append(data);
 
 
