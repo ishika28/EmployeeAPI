@@ -8,7 +8,7 @@
     tools:context=".UpdateActivity">
 
     <EditText
-        android:id="@+id/etdeleteemployee"
+        android:id="@+id/etemployeeNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter employee No"
@@ -20,10 +20,10 @@
         />
 
     <Button
-        android:id="@+id/btndelete"
+        android:id="@+id/btnsearchemp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DELETE"
+        android:text="SEARCH"
         android:textSize="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
@@ -31,18 +31,57 @@
 
 
     <EditText
-        android:id="@+id/etupdateemployeenumber"
+        android:id="@+id/etempname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Employee No"
         android:textSize="20dp"
-        android:layout_margin="30dp"
+      android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:inputType="number"
         />
     <EditText
-        android:id="@+id/etemployeesalary"
+        android:id="@+id/etempsalary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Salary"
+        android:textSize="20dp"
+        android:inputType="number"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
         />
+    <EditText
+        android:id="@+id/etempage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:textSize="20dp"
+        android:inputType="number"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        />
+
+
+    <Button
+        android:id="@+id/btnupdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
+    <Button
+        android:id="@+id/btndeleteemp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
 
 </LinearLayout>
