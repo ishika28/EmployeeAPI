@@ -1,6 +1,8 @@
 package com.example.employeeapi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,13 +24,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-   private TextView tvOutput;
+    private RecyclerView recyclerView;
+    private  EmployeeAdapter employeeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvOutput=findViewById(R.id.tvOutput);
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL.base_url)
@@ -47,21 +50,23 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Employee> employeeList = response.body();
-                for (Employee employee : employeeList){
-                    String data = "";
-                    data += "Employee ID : " + employee.getId() + "\n";
-                    data += "Employee Name : " + employee.getEmployee_name() + "\n";
-                    data += "Employee Salary : " + employee.getEmployee_salary() + "\n";
-                    data += "Employee Age : " + employee.getEmployee_age() + "\n";
-                    data += "Employee profile : " + employee.getProfile_image() + "\n";
-                    data += "-----------------------------------------------------" + "\n";
-                    tvOutput.append(data);
+                LoadDataList(response.body());
+
+//                List<Employee> employeeList = response.body();
+//                for (Employee employee : employeeList){
+//                    String data = "";
+//                    data += "Employee ID : " + employee.getId() + "\n";
+//                    data += "Employee Name : " + employee.getEmployee_name() + "\n";
+//                    data += "Employee Salary : " + employee.getEmployee_salary() + "\n";
+//                    data += "Employee Age : " + employee.getEmployee_age() + "\n";
+//                    data += "Employee profile : " + employee.getProfile_image() + "\n";
+//                    data += "-----------------------------------------------------" + "\n";
+//                    tvOutput.append(data);
 
 
                 }
 
-            }
+
 
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
@@ -72,5 +77,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void LoadDataList(List<Employee>employeeList){
+        recyclerView=findViewById(R.id.recyclerview);
+        employeeAdapter=new EmployeeAdapter(employeeList);
+
+
+        //using a linear layout manager
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //set adapter to the recyclerview
+        recyclerView.setAdapter(employeeAdapter);
     }
 }
