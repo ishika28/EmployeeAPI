@@ -1,7 +1,9 @@
 package com.example.employeeapi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +22,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UpdateActivity extends AppCompatActivity {
-    private Button btnserachemp, btnupdate,btndelete;
+    private Button btnserachemp, btnupdate;
+    private Button btndelete;
     private EditText etemployeeNumber;
     private EditText etempname, etempsalary, etempage;
     Retrofit retrofit;
     EmployeeAPI employeeAPI;
+    AlertDialog.Builder builder;
 
 
     @Override
@@ -33,12 +37,13 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         btnserachemp=findViewById(R.id.btnsearchemp);
-        btndelete=findViewById(R.id.btndeleteemp);
         btnupdate=findViewById(R.id.btnupdate);
+        btndelete=findViewById(R.id.btndeleteemp);
         etempname=findViewById(R.id.etempname);
         etempage=findViewById(R.id.etempage);
         etempsalary=findViewById(R.id.etempsalary);
         etemployeeNumber=findViewById(R.id.etemployeeNumber);
+        builder =new AlertDialog.Builder(this);
 
         btnserachemp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +62,32 @@ public class UpdateActivity extends AppCompatActivity {
         btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteEmployee();
+                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+
+
+                //Setting message manually and performing action on button click
+                builder.setMessage("Do you want to delete employee ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                deleteEmployee();
+                                finish();
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Action for 'NO' Button
+                                dialog.cancel();
+
+                            }
+                        });
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("AlertDialogExample");
+                alert.show();
+
             }
         });
 
